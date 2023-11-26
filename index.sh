@@ -1,5 +1,15 @@
 #!/bin/bash
 
+#colores
+greenColour="\e[0;32m\033[1m"
+endColour="\033[0m\e[0m"
+redColour="\e[0;31m\033[1m"
+blueColour="\e[0;34m\033[1m"
+yellowColour="\e[0;33m\033[1m"
+purpleColour="\e[0;35m\033[1m"
+turquoiseColour="\e[0;36m\033[1m"
+grayColour="\e[0;37m\033[1m"
+
 (
 function ctrl_c(){
     clear
@@ -13,7 +23,7 @@ trap ctrl_c INT
 
 if [[ ! $1 ]] || [[ ! $2 ]] || [[ ! $3 ]]; then
 
-    echo -e "\n\t index.sh <image_url>  <local_web_port> \"<page_description>\""
+    echo -e "\n\t ${greenColour}index.sh${yellowColour} <image_url>  <local_web_port> \"<page_description>\" ${endColour}"
     ps -faux | grep -E 'ssh -R|grep|python3 -m' | awk '{print $2}' | xargs kill -9  2>/dev/null
     exit 1
 
@@ -136,11 +146,14 @@ fi
 # Se genera un servidor web python en el puerto especificado en el segundo parámetro y lo dejamos en segundo plano.
 (python3 -m http.server $2 &>/dev/null) &
 
+
 #Almacenamos el id del trabajo en la variable job_number
 job_number=$(jobs | awk '{print $1}')
 
+
 #Creamos el tunneling de nuestro servicio web local hacia internet, mediante el uso del servicio gratuito serveo que nos proporciona un subdominio
 ssh -R 80:localhost:$2 serveo.net 2>&1 | sed -e 's/dvc/\n\n______ Device info ______\n/g' -e 's/%20//g' -e 's/%3Cbr//g' -e 's/%3E//g' -e 's/%//g' -e 's/&/\n\t/g' -e 's/=/: /g' -e 's/?/\n\t/g' -e 's/trg/\n\n______ target info ______\n/g'&
+
 
 #Traemos al frente nuevamente el servicio web
 fg %$job_number 
