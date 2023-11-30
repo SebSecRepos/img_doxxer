@@ -30,7 +30,7 @@
 ## Ejemplo de uso 
 
 ```bash
-  ./index.sh "https://news.trendmicro.com/api/wp-content/uploads/2021/04/Scam-Alert_WhatsApp-819x1024.jpeg" 80 "Whatsapp code" 
+  ./index.sh "https://i.ibb.co/BsSvGRW/Sin-t-tulo.jpg" 80 "Whatsapp code" 
 ```
 
 
