@@ -29,9 +29,16 @@
 
 ## Ejemplo de uso 
 
+Primero hacer un portforwarding de cualquier puerto con serveo y ssh para dejar la conexión autorizada antes de ejecutar el script, luego darle 'yes' y cerrar la conexión.
+```bash
+  ssh -R 80:localhost:80 serveo.net
+  # ctrl + c
+```
+
 ```bash
   ./index.sh "https://i.ibb.co/BsSvGRW/Sin-t-tulo.jpg" 80 "Whatsapp code" 
 ```
+> Si algún ciberdelincuente quisiera realizar un secuestro de nuestra cuenta de whatsapp pidiendo el código que nos llega al smarthphone podríamos utilizar ingeniería social enviandole el enlace con la preview del SMS y obtener cierta información de el.
 
 
 
